@@ -1,0 +1,2184 @@
+1
+00:00:00,160 --> 00:00:10,400
+Companies like Uber, Rapolit, LinkedIn uses a framework called Langraph to build agents that are not just powerful
+
+2
+00:00:07,680 --> 00:00:16,880
+but reliable. There are so many agent AI frameworks out there and Langraph is one of the popular framework. In this
+
+3
+00:00:14,639 --> 00:00:23,519
+particular crash course, we will look at some theoretical fundamentals first and then we will dive deeper into langraph
+
+4
+00:00:21,279 --> 00:00:30,160
+covering a range of topics which I have displayed on the screen right now. I also want to take a moment to thank Jad
+
+5
+00:00:27,920 --> 00:00:38,239
+Brains for sponsoring this video. As part of this collaboration, you all will get 3 month free subscription of PyCharm
+
+6
+00:00:35,520 --> 00:00:44,640
+Pro. More details on that later. Let's start with agentic AI fundamentals through Langraph. We will be building AI
+
+7
+00:00:42,320 --> 00:00:51,360
+agents. So, it's important you know what it is. And if you already know this concept, feel free to skip to the next
+
+8
+00:00:48,399 --> 00:00:57,600
+section. When you have a simple LLM and when you ask a question, it can give limited answer. based on its training
+
+9
+00:00:55,920 --> 00:01:04,239
+cutoff. So let's say if you ask questions specific to your organization, it won't be answered because it doesn't
+
+10
+00:01:01,760 --> 00:01:11,680
+have access to this data. In my own company Atlake Technologies, we have 55 people and we want to build this HR
+
+11
+00:01:09,280 --> 00:01:18,320
+assistant chatboard where you can ask policy related questions such as how many vacation days are there or what is
+
+12
+00:01:16,000 --> 00:01:27,200
+the policy on seclive and so on and you can build such a system using a rag architecture. So let's say you have all
+
+13
+00:01:23,520 --> 00:01:35,360
+this policy data in a PDF file. You can point LLM to that knowledge using retrieval augmented generation then you
+
+14
+00:01:32,880 --> 00:01:43,759
+can ask any question and generate the answers. If you don't know about rag you will find many videos on YouTube but rag
+
+15
+00:01:40,720 --> 00:01:53,840
+is one architecture that gets used to assist LLM with external knowledge. Do we call this agent? No. Anthropic
+
+16
+00:01:50,399 --> 00:02:00,799
+defines AI systems which are built using LLM as in two categories. Okay. So the first
+
+17
+00:01:58,399 --> 00:02:07,680
+one is workflows. Second one is an agent. So workflows are systems where LLM and tools are orchestrated through
+
+18
+00:02:05,360 --> 00:02:15,840
+predefined code paths. So whatever we just saw was workflow. Let's say you enhance this chatboard further where it
+
+19
+00:02:13,520 --> 00:02:21,920
+can ask specific question for a person. Let's say moan is logged in and he's asking how many leaves do I have left.
+
+20
+00:02:19,840 --> 00:02:30,560
+It will specifically look for moan's data. Okay, 7 days left and so on. Is this call agent? Once again, no. So here
+
+21
+00:02:27,760 --> 00:02:40,400
+what's happening is LLM is having access to all the policy documents. So moan can ask general policy documents as well.
+
+22
+00:02:35,360 --> 00:02:50,879
+But LLM is also pointing to the HR database. So that through some API let's say and when you say okay as moan how
+
+23
+00:02:46,879 --> 00:02:58,239
+many leaves are left for me it will just retrieve that particular answer. This is called tool augmented chatboard. Now
+
+24
+00:02:56,080 --> 00:03:07,120
+let's complicate this further and imagine a chatbot that can prepare for Sara's maternity leave or it can onboard
+
+25
+00:03:05,440 --> 00:03:14,319
+a new employee. Now when you're onboarding a new employee, you have to perform various steps. You have to
+
+26
+00:03:11,760 --> 00:03:22,319
+schedule a welcome meeting where you will need access to outlook. You will create interns profile in HR management
+
+27
+00:03:19,760 --> 00:03:31,599
+system for which you need access to HRMS through some API let's say. Then you will create uh tickets to order laptop
+
+28
+00:03:28,000 --> 00:03:39,360
+etc. So here you are doing goal oriented planning. So you have a goal here bigger goal. It's a complex task and you are
+
+29
+00:03:37,120 --> 00:03:48,319
+kind of planning this. You are doing multi-step reasoning you know and multi-step planning and doing autonomous
+
+30
+00:03:45,120 --> 00:03:57,360
+decision making. Okay. Now as a system you have LLM as a core component but you have access to all these tools. Okay.
+
+31
+00:03:52,959 --> 00:04:05,760
+Outlook, HRMS, Slack these are all the tools that you have. Okay. You also have knowledge which is the database or any
+
+32
+00:04:02,239 --> 00:04:12,799
+documents you have. All right. So uh this is called an agent. Okay, it's an agentic chatboard because it can do
+
+33
+00:04:10,959 --> 00:04:20,799
+multi-step planning, multi-step reasoning just like how we as a humans will do it. And it has some level of
+
+34
+00:04:18,479 --> 00:04:27,120
+autonomy. Okay, some level of control. Of course, you can't give it an access to your bank's password etc. Otherwise,
+
+35
+00:04:25,120 --> 00:04:35,840
+it will do crazy things. But you give some control that hey LLM I'm giving you this control and within that control you
+
+36
+00:04:32,639 --> 00:04:44,800
+can take autonomous decisions. So AI agent is something that can make decisions and take actions on its own to
+
+37
+00:04:42,479 --> 00:04:54,000
+an extent. Okay. So you have to remember there is some some form of control here. You can't give agent access to you know
+
+38
+00:04:51,680 --> 00:05:00,720
+your Bitcoin wallet and things like that. There is some level of control but within that control it can take
+
+39
+00:04:57,199 --> 00:05:09,440
+autonomous decision. It can take actions on its own to achieve a goal without being told explicitly what to do. And
+
+40
+00:05:07,039 --> 00:05:14,560
+agentic AI you will hear these two terms AI agent and agentic AI. Agent AI is nothing but a system that is using one
+
+41
+00:05:12,960 --> 00:05:20,560
+or more agents. Okay they are similar things. So this is the chart that is showing the comparison between the three
+
+42
+00:05:18,800 --> 00:05:27,199
+in the first rack chatboard where you were asking policy questions. It is reactive but it's it doesn't use tool
+
+43
+00:05:24,639 --> 00:05:35,600
+reasoning planning proactivity. Okay. Whereas agent AI is using uh tool use reasoning planning proactivity and so
+
+44
+00:05:33,199 --> 00:05:41,600
+on. One of the biggest problems with agents is reliability. They are like monkeys. You are giving them some tools
+
+45
+00:05:39,360 --> 00:05:50,560
+and they can do all kind of crazy things. So you need to control them. If you plot a chart of agent's level of
+
+46
+00:05:47,440 --> 00:05:59,280
+control to its reliability, as you can see here, as you increase the control, the reliability will drop. So if you
+
+47
+00:05:56,800 --> 00:06:09,759
+have a fully autonomous agent just like that monkey, the reliability will go down. Okay, this is the general issue
+
+48
+00:06:05,840 --> 00:06:17,440
+with any agents. Lang graph is a framework that will help you increase the reliability for agents. Okay.
+
+49
+00:06:14,400 --> 00:06:24,639
+Langraph comes with lot of tools and features which will help you bend this graph and you can increase the
+
+50
+00:06:21,680 --> 00:06:31,120
+reliability of these autonomous agent. Okay. So it's a framework that helps you build reliable agents. Now how it
+
+51
+00:06:29,199 --> 00:06:40,880
+differs from other frameworks such as Agno, Google ADK and so on. Agno is very lightweight and fast. Google ADK on the
+
+52
+00:06:37,440 --> 00:06:50,080
+other hand has tight GCP integration. It allows you to build multi- aent system using Google's A2A protocol and so on.
+
+53
+00:06:46,800 --> 00:06:58,479
+Whereas Lang graph provides a more expressive customizable framework to build highly complex agents. Okay. So
+
+54
+00:06:56,160 --> 00:07:04,880
+it's very customizable. In other frameworks when I use them personally what I see is it's sort of like a black
+
+55
+00:07:02,080 --> 00:07:11,840
+box. Okay. you can't customize things beyond certain points. Whereas in Langraphph, you can go underneath at a
+
+56
+00:07:09,199 --> 00:07:22,800
+deeper level and customize things and create complex agents. Also, it excels at graph-based stateful orchestration.
+
+57
+00:07:19,440 --> 00:07:29,840
+We'll go over graph and state and so on. I know these things might sound like jargon but just in case if you know
+
+58
+00:07:27,360 --> 00:07:37,840
+about graph data structure and a stateful orchestration the langraph will allow you to do that okay it will allow
+
+59
+00:07:35,440 --> 00:07:45,520
+you to do multi-step workflows with memory streaming human in the loop control some of you might be familiar
+
+60
+00:07:43,440 --> 00:07:51,680
+with langchain framework and a natural question is what is the difference between these two frameworks well
+
+61
+00:07:49,360 --> 00:07:58,720
+sometimes you want to build AI system where let's say you are getting uh data from some database okay in step one then
+
+62
+00:07:56,960 --> 00:08:05,759
+you are doing some data cleaning then you are giving it to LLM for extracting some information or summarizing or doing
+
+63
+00:08:03,280 --> 00:08:12,960
+some work okay then you are performing some other step then again you're calling LLM you can have this kind of a
+
+64
+00:08:10,720 --> 00:08:20,479
+workflow system remember workflow from that anthropic document so this is that same workflow it's a linear workflow
+
+65
+00:08:17,840 --> 00:08:28,720
+which is called a chain and whenever you want to build this kind of workflows, lang chain framework is ideal and in
+
+66
+00:08:25,599 --> 00:08:36,320
+fact we have a couple of videos and one complete YouTube project where we built uh this kind of chain using lang chain.
+
+67
+00:08:33,919 --> 00:08:43,279
+Okay, where we uh retrieved the documents for which we use text loader class from lang chain. Okay, so these
+
+68
+00:08:40,800 --> 00:08:50,640
+are all the classes and tools provided by langchain frameworks. Langchain frameworks provides so many amazing
+
+69
+00:08:48,480 --> 00:08:58,720
+utilities which can be used in langraph too. by the way. Okay. So this is one example of a chain that we created in
+
+70
+00:08:56,160 --> 00:09:05,680
+one of our rocky boat project in in YouTube. Okay. So here you will use lang chain. Now when do you use langraph?
+
+71
+00:09:03,200 --> 00:09:13,519
+Well when you have some kind of autonomy that is given to LLM. For example, here you start at some point and LLM will
+
+72
+00:09:11,360 --> 00:09:21,360
+decide okay whether it wants to call step A, step B or whether it wants to make call to LLM, you know, another LLM
+
+73
+00:09:19,279 --> 00:09:29,680
+and then this LLM will also have some kind of autonomy. It will internally decide if if it wants to call step C,
+
+74
+00:09:26,800 --> 00:09:39,040
+step D, E, it can also call by the way previous LLM. You see this pathway. So here this kind of decision control is
+
+75
+00:09:36,080 --> 00:09:47,920
+given to this LLM. It is done by this LLM in autonomous way. Okay, autonomy is a keyword folks. So LLM is like a human
+
+76
+00:09:45,839 --> 00:09:54,240
+brain, right? It it it is smart. It can make that decision. You just give instruction that okay, you are given
+
+77
+00:09:51,760 --> 00:10:02,880
+this task and just figure out from this step CD E these three steps and it will determine it on its own. You're not
+
+78
+00:10:00,000 --> 00:10:09,839
+going to write some code etc. Okay, I mean you'll write code for giving a prompt but the decision is made by LLM.
+
+79
+00:10:08,000 --> 00:10:15,760
+Okay, so here you have a human brain. Here you have a human like like sort of like a human brain and it's making all
+
+80
+00:10:13,519 --> 00:10:22,640
+these independent decisions and you are seeing this graph type of data structure. Okay. So you have a graph
+
+81
+00:10:20,240 --> 00:10:30,959
+where you can have like this kind of you know like like cycles and so on and it is represented as stateful workflows
+
+82
+00:10:28,720 --> 00:10:38,959
+which is a graph. Okay. So for this scenario you will use lang graph. So let's outline the differences in a table
+
+83
+00:10:35,680 --> 00:10:46,560
+format. You use lang chain to build llm apps. Okay chains tools and agents. Whereas langraph is used to manage
+
+84
+00:10:43,920 --> 00:10:52,880
+complex workflows with state. Okay. So it will have a state and that state will pass through different nodes in the
+
+85
+00:10:50,880 --> 00:10:59,600
+graph. In lang chain you have linear and reactive chains. Whereas in lang graph you have graph based support loops,
+
+86
+00:10:57,680 --> 00:11:04,880
+retries and memories. Okay. So there is some kind of autonomy. When you're retrying let's say you are doing
+
+87
+00:11:02,720 --> 00:11:12,480
+something it doesn't work it will retry again. It's like debugging your code. You write code you get an error you see
+
+88
+00:11:09,680 --> 00:11:18,399
+the error you update it. You again run it. you know it's like a retry like you're fixing and there's a feedback
+
+89
+00:11:16,000 --> 00:11:27,440
+loop. So you'll see all of that in this lang graph and the best use case for lang chain is simple chatboards rack
+
+90
+00:11:23,920 --> 00:11:34,240
+tool usage whereas for complex workflows you know in our HR assistant chatboard when we said onboard new employee for
+
+91
+00:11:32,240 --> 00:11:43,200
+this that kind of workflow which is multi-step agent with memory you will use langraph okay uh here the state
+
+92
+00:11:40,560 --> 00:11:48,399
+handling is partially stateful or stateless in lang chain whereas in lang graph
+
+93
+00:11:46,480 --> 00:11:54,959
+it is fully stateful. So there is a state that you will pass. Okay. So let's say in in
+
+94
+00:11:53,040 --> 00:12:05,120
+lang graph you will have this kind of graph right. So you begin you have this kind of graph. This can have nodes.
+
+95
+00:12:01,519 --> 00:12:14,160
+Okay. It can be any graph and you will be passing a state. So there will be a state. So there is some kind of state
+
+96
+00:12:11,519 --> 00:12:21,120
+that you pass. So you pass it here. same state is being passed here. We will uh have a separate section on this so you
+
+97
+00:12:19,200 --> 00:12:27,120
+will understand and each of these nodes will modify this state. Okay. And then
+
+98
+00:12:25,120 --> 00:12:34,480
+example use case for lang is book a flight simple API whereas langraph you use it for complex thing like plan a
+
+99
+00:12:32,240 --> 00:12:42,399
+vacation multiple step multi-step reasoning planning and so on. They also have something called lang by the way.
+
+100
+00:12:40,000 --> 00:12:53,120
+So lang we'll we'll produce a separate video in the future on lang. So this lang is used for observability debugging
+
+101
+00:12:50,800 --> 00:13:02,959
+testing and monitoring. Okay. Whereas lang graph and lang chain these are opensource systems. Okay. There are two
+
+102
+00:12:59,279 --> 00:13:11,120
+frameworks in the lang chain ecosystem. They also have this lang platform which is used for deployment. Before we start
+
+103
+00:13:09,279 --> 00:13:18,800
+writing code, let's install some necessary stuff. The first one is IDE. We are going to use PyCharm. I love this
+
+104
+00:13:15,920 --> 00:13:26,720
+editor. Jet Brains is an official sponsor of this video and they have this unified editor. So previously they used
+
+105
+00:13:24,320 --> 00:13:33,040
+to have community version and pro version. Now there is a single version. Okay. So when you download, so just
+
+106
+00:13:31,040 --> 00:13:42,079
+click on download and it will just download the latest version. Okay. So I clicked on it and then I will install
+
+107
+00:13:38,639 --> 00:13:52,160
+it. So if you go back on their page you will see that uh by default whatever version you get is pro actually. So you
+
+108
+00:13:48,880 --> 00:13:59,920
+get 1 month of pro included and after that it is free forever with community features but as part of our
+
+109
+00:13:56,800 --> 00:14:07,920
+collaboration with PyCharm you're going to get extended free subscription of pro. Okay. So,
+
+110
+00:14:05,839 --> 00:14:15,760
+check the video description below for the coupon code. Uh we want to thank uh Jet Brains for this partnership. After
+
+111
+00:14:13,279 --> 00:14:24,480
+you uh downloaded it, obviously you will go through common sense steps. Double click, install, remove any previous
+
+112
+00:14:22,160 --> 00:14:33,519
+versions that you have. And I have this latest version of PyCharm ready. I will also create a directory to store all my
+
+113
+00:14:30,480 --> 00:14:41,360
+code. So C code is a directory where I keep all my code. So here I'm going to create
+
+114
+00:14:38,720 --> 00:14:52,160
+maybe lang graph learning you know lang graph learning that kind of folder I'll store all my code here
+
+115
+00:14:47,360 --> 00:15:01,639
+and here you will just say open C code just open that folder you know lang graph learning
+
+116
+00:14:57,760 --> 00:15:11,519
+okay select the folder so it will open that up here. All right. Now,
+
+117
+00:15:07,600 --> 00:15:24,240
+you will also explore this AI assistant that is inbuilt in PyCharm. So, you get this AI pro for free for 30 days. Just
+
+118
+00:15:19,600 --> 00:15:32,160
+click on let's go to enable it. Okay. All right. So, see this is enabled. Now, you can pick your model from here. You
+
+119
+00:15:29,279 --> 00:15:38,079
+can ask it to write code, whatever. We are going to use AI assistant and some of the cool features of PyCharm
+
+120
+00:15:36,079 --> 00:15:46,720
+throughout the entire tutorial. We will also install UV which is an efficient Python package manager. You can use it
+
+121
+00:15:43,360 --> 00:15:55,519
+as a replacement of pip. Click on installation step here and I have Windows. So I'm going to copy this
+
+122
+00:15:51,279 --> 00:16:04,720
+command and put it in my Windows command prompt. Okay. So I'm using Windows command prompt. Here I will put it add
+
+123
+00:16:01,199 --> 00:16:14,000
+and it will add UV. We'll use UV to install other necessary Python packages. Okay. Now we have created this langraph
+
+124
+00:16:10,320 --> 00:16:21,839
+learning uh folder. So let's go into that folder and then you will have access to this UV
+
+125
+00:16:18,639 --> 00:16:30,399
+command. You will just say UV in it and it will perform some necessary initialization. So if you check here, it
+
+126
+00:16:26,880 --> 00:16:38,800
+added pi project.toml file. I will go over what it is. Uh it's just necessarily your package management.
+
+127
+00:16:35,600 --> 00:16:48,959
+Then it also added Python version. So I have Python 3.10 by the way. Uh it's okay even if you have 3.11 or a later
+
+128
+00:16:45,600 --> 00:16:56,399
+version. I'm going to use 3.10. Then you have git ignore. So you can enhance this. you know you can add
+
+129
+00:16:53,680 --> 00:17:04,559
+whatever extra files here. So this is the project structure that it has created and PyCharm is asking me to
+
+130
+00:17:01,839 --> 00:17:15,039
+select a valid Python interpreter. So what I'm going to do is I will create virtual environment using UV and the way
+
+131
+00:17:11,600 --> 00:17:25,360
+you do that is you will install necessary Python uh packages. So for now what I need is langraph. So you can just
+
+132
+00:17:21,199 --> 00:17:35,120
+say uv add in that directory lang graph I also need python dot environment I need notebook. So just add and you'll
+
+133
+00:17:32,480 --> 00:17:41,760
+see it's so fast it created virtual environment here. See v environment and it also
+
+134
+00:17:39,840 --> 00:17:51,120
+added all the dependencies. So you will see this toml file being updated. See all the dependencies are added and the
+
+135
+00:17:48,000 --> 00:17:58,320
+exit dependencies are expanded in this uv.log file. Okay. So these are internal details. You don't need to worry. You
+
+136
+00:17:55,679 --> 00:18:07,520
+can treat it as a black box. Whatever you want to install. Uh previously with pip you will say pip install something.
+
+137
+00:18:03,280 --> 00:18:14,960
+Now with uv you are saying uv add that particular thing. Now let me configure python interpreter. So click on
+
+138
+00:18:12,160 --> 00:18:24,559
+configure python interpreter. uh go to interpreter settings and here just say add interpreter add
+
+139
+00:18:21,200 --> 00:18:32,559
+local interpreter. Okay, select existing and click on this folder icon. Okay, folder icon and here you need to select
+
+140
+00:18:30,160 --> 00:18:42,240
+the virtual environment. So we have langraph learning okay which has venv folder that's your virtual environment.
+
+141
+00:18:38,960 --> 00:18:50,080
+Go to scripts and in scripts you need to pick up a python.exe. Okay. Make sure you're selecting the
+
+142
+00:18:47,679 --> 00:18:57,400
+Python interpreter within the virtual environment which is created by UV. So once you hit okay
+
+143
+00:18:57,600 --> 00:19:07,520
+all right now your environment is all set. Graph is a most fundamental data structure in langraph. So let's
+
+144
+00:19:05,440 --> 00:19:17,039
+understand some of the basics. If you have taken computer science classes, you will know graph uh already. So graph is
+
+145
+00:19:13,280 --> 00:19:24,640
+nothing but nodes and ages. So let's say you have Google map, right? Like and you have all these cities. Let's say you
+
+146
+00:19:20,160 --> 00:19:32,320
+have Delhi, New York, Mumbai, etc. So these cities are sort of like nodes. Okay? So whatever round you are seeing,
+
+147
+00:19:28,559 --> 00:19:41,120
+they are nodes. And the thing that connects these two nodes are called ages.
+
+148
+00:19:37,679 --> 00:19:49,039
+Okay. So going back to our example of Google map. Let's say this is Delhi. Okay. And from Delhi I'm going to
+
+149
+00:19:45,600 --> 00:19:55,520
+Mumbai. Just think about this as a road between Delhi and Mumbai. You know some expressway.
+
+150
+00:19:53,039 --> 00:20:03,600
+Graphs can also have cycles you know and graphs are used to represent things like your Facebook connections. So in in your
+
+151
+00:20:00,480 --> 00:20:10,640
+Facebook uh when you have friends so you your friend they are all nodes and your relationship let's say you're a friend
+
+152
+00:20:08,640 --> 00:20:20,240
+family whatever you know same way with LinkedIn those things are ages so we will build our first simple graph in a
+
+153
+00:20:18,320 --> 00:20:27,600
+lang graph and for that we are going to use an example of uh let's say your stock trading account let's say you have
+
+154
+00:20:24,480 --> 00:20:36,559
+stock trading account in Robin Hood or zeroda you put money in let's say you are investing in corporate bonds and you
+
+155
+00:20:33,360 --> 00:20:45,760
+get almost similar kind of fixed uh return let's say around 8%. Okay. Now I live in US. I invest money and sometimes
+
+156
+00:20:43,360 --> 00:20:54,400
+you know I'm from India. So I have this mindset of looking at my portfolio in INR Indian rupees. So what I do is I
+
+157
+00:20:52,000 --> 00:21:02,080
+invest money and then I get the return and then I calculate the total amount and then I convert it to INR. Okay. So
+
+158
+00:20:58,880 --> 00:21:10,559
+if you think about that uh in terms of a graph what you have is you have your input amount. Okay. Let's say you have
+
+159
+00:21:07,840 --> 00:21:19,120
+input amount in zerod. Let's say you put or let's say bank account you put some $1,000 and you have your first node
+
+160
+00:21:15,440 --> 00:21:27,520
+which will calculate your total amount including interest. So let's say you are getting interest or let's say bond is
+
+161
+00:21:23,840 --> 00:21:42,400
+giving you 8% return. Okay. So here this is your first node and after you get 8% return your total okay your total in USD
+
+162
+00:21:37,440 --> 00:21:51,919
+is going to be 1,000 into 8%. So 8% is like so if you do this you will get the total amount okay and then in node two I
+
+163
+00:21:48,240 --> 00:22:01,919
+would like to convert this amount into INR. Okay. So this one the first node let's say if you have to write python
+
+164
+00:21:57,360 --> 00:22:09,600
+function we can say calc total this will be my function and the second function will be convert
+
+165
+00:22:07,679 --> 00:22:19,440
+to INR and when you do that like your total INR will be whatever is your total USD
+
+166
+00:22:16,320 --> 00:22:29,679
+amount multiplied by the exchange rate let's say right now it's 85 so this okay and that's the amount you get uh as an
+
+167
+00:22:25,360 --> 00:22:37,520
+output. Okay. Now the way lang graph uh graphs work is they will consume something called a state. So if you have
+
+168
+00:22:34,400 --> 00:22:47,280
+taken some computer science classes uh you will know about this state. So state is let's say an object. Okay. So state
+
+169
+00:22:44,159 --> 00:22:53,360
+is an object which gets passed between the nodes and this state will have all these parameters right. So it will have
+
+170
+00:22:51,360 --> 00:23:04,400
+amount it will have total USD total USD it will have total INR and so on and
+
+171
+00:23:01,919 --> 00:23:11,679
+you pass this state you know like like it goes through this node and you get new state again you get new state so
+
+172
+00:23:10,240 --> 00:23:18,799
+you're not calling these nodes by function etc it's just a state whatever you want to pass single object you pass
+
+173
+00:23:16,400 --> 00:23:28,400
+it and it just comes out so let me write the code folks this is very very simple. Uh you you will be amazed how simple
+
+174
+00:23:24,799 --> 00:23:38,480
+this thing is. So let's create a notebook. Now uh this PyCharm version allows you to write notebooks
+
+175
+00:23:36,320 --> 00:23:48,720
+uh inside the ID. Okay? So you don't have to go outside. And I will just call it simple graph.
+
+176
+00:23:44,960 --> 00:24:00,159
+Now what I love about uh this is it will give you AI autocomplete. Okay. So first thing that we are going to do is we will
+
+177
+00:23:56,640 --> 00:24:11,360
+define our state. Okay. So this state this red square is an object a python dictionary or let's say class. Okay. So
+
+178
+00:24:06,400 --> 00:24:17,679
+let's define that. So I will say class portfolio state.
+
+179
+00:24:15,760 --> 00:24:26,720
+Okay. And now I want this to be derived from type
+
+180
+00:24:23,840 --> 00:24:34,880
+dict. So in Python you you know about this uh thing typing right? So this way you create type
+
+181
+00:24:32,880 --> 00:24:43,919
+hints. You know Python is not a statically typed language but you can use this typing hints to define data
+
+182
+00:24:39,919 --> 00:24:51,039
+types of your members. So here once you derive this from type dict you'll be able to define the types. Okay. So here
+
+183
+00:24:48,880 --> 00:24:58,240
+I will have amount USD which will be float. Now see this is what I like about AI editor like
+
+184
+00:24:56,880 --> 00:25:05,840
+when you're typing something it will try to autocomplete and then you will have total
+
+185
+00:25:03,360 --> 00:25:17,760
+USD which is float. See I'm just hitting tab and then you have total INR and that is also float. So control enter
+
+186
+00:25:15,840 --> 00:25:27,679
+or just hit this button. See it is running this. And then the next one will be I will just create an object just to
+
+187
+00:25:22,720 --> 00:25:34,880
+kind of show you right. So my object um and how do you define the types in Python? Well once again Python is a
+
+188
+00:25:32,559 --> 00:25:43,039
+dynamically typed language. So when you say colon this you are defining a type hint not the exact type. And here you
+
+189
+00:25:41,279 --> 00:25:52,159
+can have amount USD whatever
+
+190
+00:25:48,799 --> 00:26:01,039
+and then you have total USD and then you have total INR. Okay. Now when you do this it works okay but let's
+
+191
+00:25:58,720 --> 00:26:08,000
+say if I have improper key see you will see this kind of type hint. See this bulb. So it is saying that there are
+
+192
+00:26:06,159 --> 00:26:16,880
+incorrect types. Okay. Okay, so that's the whole idea of doing this type dict. All right, my state object which is this
+
+193
+00:26:14,880 --> 00:26:25,440
+red object is defined. Now I need to define these two nodes which is nothing but a simple Python function that state
+
+194
+00:26:22,320 --> 00:26:34,240
+as an input. Okay, so you will have calc total. It will take portfolio state as an input and it will output the
+
+195
+00:26:31,919 --> 00:26:42,960
+portfolio state. Okay. So, portfolio state will be my output. And here what you are getting is uh
+
+196
+00:26:40,000 --> 00:26:56,320
+let's say I want to call this object state. In the state the total USD amount that I
+
+197
+00:26:49,919 --> 00:27:06,240
+have is nothing but the amount in USD multiply by the return rates. Let's say I'm getting 8% fixed return. Okay.
+
+198
+00:27:04,240 --> 00:27:12,480
+And I will just return this state back. Okay. So you're getting state as an input. You are returning state as an
+
+199
+00:27:10,320 --> 00:27:19,120
+output as per this diagram. This red square will pass between the nodes. So say same thing for the second function
+
+200
+00:27:16,240 --> 00:27:26,720
+which is convert to INR. So I'll just copy paste folks just to save time on recording. Pretty straightforward. you
+
+201
+00:27:24,159 --> 00:27:35,600
+are getting state as an input, state as an output and this is how you define the data type of output using the Python
+
+202
+00:27:31,600 --> 00:27:43,120
+type hints. Okay? And in this function what you're doing is you're saying total INR is nothing but whatever is the total
+
+203
+00:27:39,600 --> 00:27:50,559
+amount in USD multiplied by 85. Now in real life situation you will get the live conversion rates using some APIs.
+
+204
+00:27:48,640 --> 00:27:58,960
+Here it's a learning tutorial so we don't need to bother about all of that. All right. So let's execute this. This
+
+205
+00:27:55,679 --> 00:28:09,600
+is done. Now I will go ahead and define my graph. So lang graph dot graph import state graph. Okay. And my
+
+206
+00:28:08,240 --> 00:28:19,520
+builder. So there is something called builder which will let you define that graph. Okay. So here the state is your
+
+207
+00:28:18,000 --> 00:28:28,080
+portfolio state. So that is what you're passing it as an input. Okay. And in the graph what do you do? Well, you add
+
+208
+00:28:25,679 --> 00:28:39,120
+nodes. Okay, first you add nodes and then you define the relationship which is like ages. So I will just add a node
+
+209
+00:28:34,399 --> 00:28:47,440
+here saying add node and calculate total. Now you can also define the name of the node. Okay. So my
+
+210
+00:28:45,520 --> 00:28:59,279
+you can also call it calculate total node, right? calc total and then same way you will say
+
+211
+00:28:54,480 --> 00:29:08,080
+uh this one is convert to INR and this is convert to INR node. Okay. So these are the two nodes you have added. Now
+
+212
+00:29:05,520 --> 00:29:17,840
+you need to add ages to define the relationship. Okay. So it will always start with uh something called a start
+
+213
+00:29:13,679 --> 00:29:26,320
+age. Okay. So here you you will begin with this start age. So you are starting with a start age and then you will end
+
+214
+00:29:23,679 --> 00:29:36,000
+with the end age. So let's start with that builder dot add age
+
+215
+00:29:32,799 --> 00:29:46,159
+and in add age you will have start. So start is a constant that you can import from this.
+
+216
+00:29:43,039 --> 00:29:57,600
+So from start first I want to calculate the total correct and then from total I want to go to INR and from INR I want
+
+217
+00:29:55,679 --> 00:30:04,960
+to go to N. Now you just notice like my AI autocomplete is completing it. So I'm saving a lot of time when I use this AI
+
+218
+00:30:02,960 --> 00:30:11,600
+assistant. I feel like I have got some iron man kind of superpower. You know my productivity goes up because I don't
+
+219
+00:30:08,960 --> 00:30:20,399
+have to type so many things. You can also use this AI assistant code here and you can just say whatever you want to
+
+220
+00:30:17,440 --> 00:30:30,159
+do, right? Like you can just say okay complete the code for builder
+
+221
+00:30:25,840 --> 00:30:40,240
+and display the graph using I display. So when you do that it is generating the code. See
+
+222
+00:30:38,000 --> 00:30:47,679
+you see. So that way it is useful. So I'll just delete it um just to kind of show you manually before I show you how
+
+223
+00:30:45,919 --> 00:30:55,840
+to display the graph. We need to build it. So we'll just say graph is equal to builder dot compile.
+
+224
+00:30:53,360 --> 00:31:04,320
+And this is the code. You just copy paste. You don't need to remember syntax etc. to display the
+
+225
+00:31:00,399 --> 00:31:13,360
+graph. So as you can see here it has a start node. Then there is calc total node convert to INR node and end. Now
+
+226
+00:31:09,919 --> 00:31:24,320
+you can simply call it by doing this. You can just say graph dot invoke and pass your initial state. Okay. So see on
+
+227
+00:31:20,720 --> 00:31:32,960
+a $1,000 USD amount uh the total USD is 1080 and total INR is this much. Now when you look at this graph it looks
+
+228
+00:31:29,679 --> 00:31:41,360
+more like a linear chain. In the next step, we are going to create a graph with some conditions. We will design
+
+229
+00:31:38,080 --> 00:31:49,360
+this kind of graph where you give your amount as an input and also target currency. So previously we had INR as a
+
+230
+00:31:47,519 --> 00:32:00,240
+fixed currency. Now I want to supply INR, EUR etc. And based on the target currency, it will call different nodes.
+
+231
+00:31:55,760 --> 00:32:12,320
+Okay. So let's create a Jupyter notebook here. This will be to graph with condition.
+
+232
+00:32:09,039 --> 00:32:22,559
+And here I'm going to do some copy paste. Now I don't want this to be total INR.
+
+233
+00:32:17,440 --> 00:32:31,440
+It is total INR. And you will have a target currency. Okay. So from by the way if you want to support fixed set of
+
+234
+00:32:28,480 --> 00:32:43,760
+currency you can use literal which will means like just use from these currencies. Okay. So let's say I want
+
+235
+00:32:38,720 --> 00:32:57,279
+only INR and EUR to be my target currency. Okay. So let's execute this and also copy paste this here.
+
+236
+00:32:54,080 --> 00:33:07,679
+So I have total USD. I think this function is okay but total INR should be this because we
+
+237
+00:33:04,320 --> 00:33:16,960
+don't have that total INR variable and let's create a convert to EUR function. Okay, so convert to EUR
+
+238
+00:33:14,480 --> 00:33:27,200
+will be whatever is the I'm just hard coding 0.9. Whatever is the rate you can put it there. Okay, so let's execute. So
+
+239
+00:33:22,799 --> 00:33:38,559
+we have this three nodes now. So let's add those three nodes. Okay. So here I will once again copy paste this
+
+240
+00:33:35,440 --> 00:33:49,279
+calc total node convert to INR node and convert to EUR node. Okay. So this is convert to EUR
+
+241
+00:33:45,120 --> 00:34:01,120
+EUR. Now let's think about ages. So the first age is this which is okay. You always calculate total and then you add
+
+242
+00:33:58,000 --> 00:34:11,119
+something called a conditional age. So in conditional age your start key or your source is let's say this one right
+
+243
+00:34:08,639 --> 00:34:21,359
+kelp total node and then you want to write a function that will help you select you know which
+
+244
+00:34:16,800 --> 00:34:31,839
+node to go to. So we can say choose conversion is our function. it will get state as an input obviously
+
+245
+00:34:26,960 --> 00:34:41,440
+portfolio state and I want the string to be the output. It will return a string and and see you can do simply you can
+
+246
+00:34:37,760 --> 00:34:48,639
+just return the target currency folks. So based on whatever is the target currency you can make a decision. So let
+
+247
+00:34:45,679 --> 00:34:59,359
+me show you. So once you do that you supply this as a second argument here. Okay. So first argument is the starting
+
+248
+00:34:54,399 --> 00:35:07,599
+node. Second one is the function. So calculate node calculated a state and state was passed to conversion and what
+
+249
+00:35:05,599 --> 00:35:16,640
+you got as an output is a string actually. Okay. So here you can do something like
+
+250
+00:35:14,240 --> 00:35:25,440
+say hello this autocomplete. So the output can be either INR or EUR and you want to map INR to convert to INR node
+
+251
+00:35:23,359 --> 00:35:34,560
+and convert to UR node. So you're just doing the mapping. Okay. So that's your conditional age. And your last age
+
+252
+00:35:32,960 --> 00:35:45,839
+is you can do this. You can do either this or you can supply this as an array.
+
+253
+00:35:40,079 --> 00:35:57,200
+Either way works fine. Okay. So applying this as an array and then graph is equal to builder dot
+
+254
+00:35:53,680 --> 00:36:06,880
+compile. I run it and then okay I got this error because this function was not defined.
+
+255
+00:36:03,280 --> 00:36:16,240
+Okay, it ran fine and let's run the graph. See you see like now you see
+
+256
+00:36:13,440 --> 00:36:23,920
+from calculate node it will use this function which will return which function choose conversion remember
+
+257
+00:36:21,040 --> 00:36:31,920
+choose conversion will return either UR or INR and based on that it will pick this function
+
+258
+00:36:28,960 --> 00:36:39,440
+all right now let's run this so you will just say graph dot invoke
+
+259
+00:36:36,800 --> 00:36:47,920
+and see for INR currency See it is returning this. I mean you can do the math it's correct. Or if you do eur it
+
+260
+00:36:45,440 --> 00:36:56,160
+is going through a different path of invocation. So congratulation we just created a graph with some conditions and
+
+261
+00:36:54,160 --> 00:37:04,800
+some kind of routing. Let us now create a simple chatboard state graph. Here we will be using Google Gemini model. You
+
+262
+00:37:02,000 --> 00:37:14,560
+can use openAI or other model too. You need to create API key first. So just Google Gemini API key and click on this
+
+263
+00:37:10,240 --> 00:37:25,839
+link and click on get API key or let's say create API key and here it will ask you for the Google project. So you can u
+
+264
+00:37:22,720 --> 00:37:33,119
+once again Google Google cloud project and here you'll be logging using your Gmail ID obviously and if you click here
+
+265
+00:37:30,880 --> 00:37:39,920
+you will see all your projects. So just create a new project. Okay, I have already created all these projects. So,
+
+266
+00:37:37,359 --> 00:37:51,440
+I'm going to select AI agents tutorial. So, AI agents tutorial and create an API key. Once that API key is copied to a
+
+267
+00:37:47,200 --> 00:37:59,880
+secure place, what you will do is you will create this file called env. Okay? So right click file enviable
+
+268
+00:38:00,079 --> 00:38:13,440
+Google API key and whatever is your key just copy paste that we will now create a new notebook called
+
+269
+00:38:09,920 --> 00:38:21,680
+chatbot and we'll load that key into environment variable okay so from dot environment this is the module that we
+
+270
+00:38:18,000 --> 00:38:30,160
+use when you do this it will set Google Gemini key as an environment variable. Okay. So, execute this and
+
+271
+00:38:27,119 --> 00:38:38,320
+we'll install some necessary modules now. So, just say UV add lang chain. Lang chain is probably not installed
+
+272
+00:38:35,680 --> 00:38:49,119
+right now. And the other one is lang chain Google geni. This if you're using openai you have to install a different
+
+273
+00:38:44,480 --> 00:38:57,839
+module. Okay. Then uh from lang chain dot chat models
+
+274
+00:38:54,160 --> 00:39:11,079
+okay import init chat model okay and then create an llm
+
+275
+00:39:06,240 --> 00:39:27,119
+by calling init chat model. So I'll be using Gemini here. And when you do llm invoke and say who was the
+
+276
+00:39:20,240 --> 00:39:34,480
+first person to walk on moon, it will it will answer that question. Okay. So your basic LLM setup is done and you will see
+
+277
+00:39:32,079 --> 00:39:42,320
+that it will have this AI message, human message, you know, all those kind of things. All right. So this thing is set
+
+278
+00:39:38,400 --> 00:39:50,079
+up. Now let's create our uh state graph. Okay, our state graph and our usual setup. So I'm going to remove this
+
+279
+00:39:46,320 --> 00:40:00,960
+because this is not needed. And here you will create a state and I will also import some necessary models here all in
+
+280
+00:39:55,040 --> 00:40:12,640
+one go. Okay. So this is type dict and my state like what should be the state? Well, I'm exchanging messages. So
+
+281
+00:40:07,520 --> 00:40:20,000
+it is good if I have a messages list you know because there is a conversation to maintain the chat history I will have
+
+282
+00:40:17,839 --> 00:40:29,520
+all the messages being appended into this messages list. So therefore I'm having this and our node will be
+
+283
+00:40:25,200 --> 00:40:39,680
+chatboard which takes this particular state as input. It will output the same thing
+
+284
+00:40:34,400 --> 00:40:49,280
+and you will say return you want to return same thing right like messages and you will say that
+
+285
+00:40:46,560 --> 00:40:56,960
+um so see messages is a list okay and you'll say llm dot invoke whatever llm you created
+
+286
+00:40:54,079 --> 00:41:04,319
+this okay I I'll run it and you will get more idea on this and then our graph compilation is pretty straightforward
+
+287
+00:41:01,680 --> 00:41:13,280
+you have start node chat port and compile right so that's pretty straightforward and now I will say graph
+
+288
+00:41:10,800 --> 00:41:21,760
+dot invoke so this is a common convention that they use where you specify role of user and the actual
+
+289
+00:41:18,480 --> 00:41:31,119
+message okay so graph dot invoke it expects messages as a state input right you need to add her to this schema
+
+290
+00:41:27,680 --> 00:41:42,480
+okay and that messages is this message and you will get a response back which
+
+291
+00:41:37,359 --> 00:41:50,079
+will be again messages. So response messages um you can you can print this and let's
+
+292
+00:41:47,359 --> 00:42:00,160
+see how this goes. Okay, so I executed this and it says Neil Armstrong. Okay, Neil Armstrong. So it worked as expected
+
+293
+00:41:57,760 --> 00:42:07,760
+but I don't see the original question. Usually when you are in chat GPD right you see a question from a human right so
+
+294
+00:42:05,040 --> 00:42:17,200
+there is a human message where we say okay it will ask okay who was the first person to walk on the moon then it will
+
+295
+00:42:13,280 --> 00:42:25,280
+be an AI human that kind of thing okay so you somehow want to preserve that original question because then if you're
+
+296
+00:42:23,760 --> 00:42:34,640
+maintaining a chat history it will have a context so in order to do that we need to make some changes here. Okay, here we
+
+297
+00:42:32,319 --> 00:42:42,880
+are not just saying list but we are saying this is annotated list and then we will say add messages. So add
+
+298
+00:42:40,240 --> 00:42:52,240
+messages is a built-in function from lang graph what it will do is once you specify this kind of uh syntax it will
+
+299
+00:42:50,160 --> 00:43:00,880
+automatically preserve the original message. Okay so let me just run it quickly. Okay here annotated is not
+
+300
+00:42:58,240 --> 00:43:09,280
+defined. Okay, because it is here and I did not execute this cell. Okay, so let me just execute this
+
+301
+00:43:06,560 --> 00:43:16,560
+and then this. You need to execute all of this. Now when you see it, see human message
+
+302
+00:43:14,319 --> 00:43:24,960
+is preserved. So first is human message who walked on the moon for the first time and then there is AI message. Okay.
+
+303
+00:43:21,599 --> 00:43:33,520
+So this uh function by the way is called a reducer function. This particular add message is called a reducer function. It
+
+304
+00:43:31,440 --> 00:43:41,119
+will add some kind of validation to messages. It will tell it you know that it you don't need to override but you
+
+305
+00:43:38,319 --> 00:43:50,800
+need to append the new messages which is coming from AI. If you want to understand that in detail you can just
+
+306
+00:43:45,599 --> 00:44:00,720
+Google langraph reducers. Okay, reducers add message function and you will find some documentation.
+
+307
+00:43:57,440 --> 00:44:12,560
+Okay, so update state all of that. Um, so I I went to this particular I think where is it? Yeah, here. See, so
+
+308
+00:44:08,800 --> 00:44:21,200
+this is how reducer works. So when you have this function add messages, right? add messages.
+
+309
+00:44:19,440 --> 00:44:27,839
+You can read more about it. They have given nice documentation. All right. So, our chatbot is defined. Let's say if you
+
+310
+00:44:25,440 --> 00:44:36,000
+want to write a loop uh where you can ask question one by one, then you can use this particular code. So, let me
+
+311
+00:44:32,240 --> 00:44:44,480
+just show it to you. It's just simple while loop, okay? Where you initialize your state to be none. And then in the
+
+312
+00:44:42,160 --> 00:44:50,960
+first iteration when state is none, see, you're taking the message from the input. Okay? input cell you are taking
+
+313
+00:44:47,839 --> 00:44:59,119
+the message from and when the state is null you will have simple object like this but next time onwards whatever
+
+314
+00:44:56,960 --> 00:45:05,040
+messages you have so after first iteration you will have one human message one AI message and then you
+
+315
+00:45:02,480 --> 00:45:14,880
+append one that the new human message to that okay so that way our chat history is maintained so let me just run it so
+
+316
+00:45:11,520 --> 00:45:25,119
+here who was the first person to walk on the moon. Print name only. Right? So
+
+317
+00:45:22,160 --> 00:45:35,040
+when you do that, see it is saying Neil Armstrong. Now you can say, okay, which year? Which year?
+
+318
+00:45:32,240 --> 00:45:41,040
+And it is saying 1969. See, so there is a context. Now you can ask related questions and it will work. Okay. When I
+
+319
+00:45:39,119 --> 00:45:49,599
+ask this question, what is the latest price of MSFT stock to the chatbot that we just created? it will say I am unable
+
+320
+00:45:46,640 --> 00:45:58,880
+to provide real-time stock prices because LLM's knowledge is cut off until certain date and in order to build
+
+321
+00:45:55,200 --> 00:46:07,359
+useful agents you need to provide tools to agents. So when a person ask questions such as MSFT stock price LLM
+
+322
+00:46:04,720 --> 00:46:17,599
+should be able to call Yahoo Finance API or some Python function to get the latest uh stock price. So we are going
+
+323
+00:46:12,800 --> 00:46:27,119
+to now build uh a tool for this chatboard. Okay. So let me just unccommand this
+
+324
+00:46:23,040 --> 00:46:34,160
+and I have created this four tool call. Okay. So right click jupyer notebook. I created it. I imported couple of
+
+325
+00:46:32,640 --> 00:46:45,200
+necessary libraries and I will just create the llm in the same way that we did last time.
+
+326
+00:46:41,280 --> 00:46:54,319
+Okay. So we just created LLM like this. But I want to provide this LLM access of a tool that can get stock prices. Now I
+
+327
+00:46:52,480 --> 00:47:01,599
+don't want to go to the intricacies of calling Yahoo Finance API etc. What I'll do is I will just define a Python
+
+328
+00:46:59,119 --> 00:47:08,319
+function and assume it is giving the latest stock price. Okay. So let's say this is the Python function. So I'll
+
+329
+00:47:06,160 --> 00:47:16,319
+just copy paste. Save some time on typing. And all you're doing is passing the symbol Microsoft, Apple, etc. And it
+
+330
+00:47:13,359 --> 00:47:22,240
+will just return some dummy value. Okay, in real life industry use case, you will call Yahoo Finance or whatever API. But
+
+331
+00:47:20,720 --> 00:47:30,960
+for learning, this function is good enough. And you will annotate that as add tool. Okay, so tool is something
+
+332
+00:47:28,640 --> 00:47:40,400
+that we have imported from lang chain core. And now we have this tool. Then you create this tools variable which
+
+333
+00:47:38,960 --> 00:47:46,720
+contains all the tools. So let's say if you have second function you know you can have second function third function
+
+334
+00:47:43,359 --> 00:47:58,400
+you can have a list of tools here and you will now create a variable called llm with tools and you will say llm
+
+335
+00:47:56,000 --> 00:48:08,480
+dotbind actually there is another method llm.bind bind tools. Okay, let's execute this. So this is looking good and I have
+
+336
+00:48:05,200 --> 00:48:16,400
+copy pasted same code. Okay, chatboard how you build graph everything remains same. Now here we are going to add one
+
+337
+00:48:13,760 --> 00:48:25,839
+condition to add the access of tools to this chatboard which is builder dot add conditional age. See you want to call
+
+338
+00:48:22,800 --> 00:48:31,839
+the tool only if required. If some person is asking question on stock price then it provide access to tool otherwise
+
+339
+00:48:30,000 --> 00:48:43,359
+you don't need to that's why this is a conditional age which starts with h8 board and it will end in something
+
+340
+00:48:39,760 --> 00:48:52,720
+called tools condition. Okay. Now tools condition is something that we have imported from lang graph
+
+341
+00:48:49,280 --> 00:49:01,440
+pre-built and what this will do is it will return either tools or underscore and now what
+
+342
+00:48:58,480 --> 00:49:10,559
+does that mean? Let me just show you. So here um and by the way I added the tools node as well. Okay so there are like two
+
+343
+00:49:06,800 --> 00:49:18,720
+changes like this and this. So you added a node for chatboard then you added a node for tools and you have to just say
+
+344
+00:49:15,839 --> 00:49:26,319
+tool node tools right so tools is this tool node tools and tool node is again a pre-built class that we have called and
+
+345
+00:49:24,319 --> 00:49:35,280
+the second line that I added is add conditional age from chatboard to tools condition so let me execute this code to
+
+346
+00:49:30,880 --> 00:49:46,559
+show you so you see here uh what is happening is From chatbot you have a conditional age
+
+347
+00:49:42,880 --> 00:49:54,480
+going to tools. So why is it dotted? Because only if required then call tools. Otherwise chatboard can directly
+
+348
+00:49:52,000 --> 00:50:01,680
+go to end. Okay. So chatbot is going to either tools or end. And that is what is specified by tools condition. See it is
+
+349
+00:49:59,839 --> 00:50:11,280
+going to either tools which is this tools or end. Okay. So that's what this tool condition means. It means from
+
+350
+00:50:08,240 --> 00:50:21,359
+chatboard when required go to tools otherwise if not required go to end. Okay. And um I think even if you don't
+
+351
+00:50:18,000 --> 00:50:33,200
+do this should work. Okay. Let me just try this. Yeah. See. All right. So my this thing is done. Now I can just type
+
+352
+00:50:31,040 --> 00:50:41,440
+in some message. So I'll just say what is the price of Amazon stock right now. and see 150. So it is making a tool call
+
+353
+00:50:39,040 --> 00:50:50,960
+and it is retrieving 150. What is the price of apple? 100.4. Okay. So 100.4 is something that it should return. And
+
+354
+00:50:48,559 --> 00:50:57,119
+when you look at the state here, watch this. This is very important. So you had a human message, right? What is the
+
+355
+00:50:54,960 --> 00:51:10,400
+price of your original question? Then you have a AI message. Okay? And you have this tool call. So see tool
+
+356
+00:51:05,200 --> 00:51:18,640
+message. So your tool is returning 100.4 and you call get stock price. Okay, you call this get stock price function.
+
+357
+00:51:16,880 --> 00:51:26,160
+Okay, so here on the AI message you can see the exit function call. uh it is Apple get stock price and this is the
+
+358
+00:51:24,240 --> 00:51:34,319
+beauty of LLM that from your natural question which is this it intelligently figured out that it needs to call this
+
+359
+00:51:31,440 --> 00:51:42,000
+and how it did it uses this doc string you know it knows that I have access of this tool which will return the current
+
+360
+00:51:38,319 --> 00:51:50,400
+price of a stock okay so from this it extracted apple as a stock ticker then it called this function okay uh and if
+
+361
+00:51:48,400 --> 00:51:56,800
+you look at the state you see that function call see function call argument symbol apple get stock price and the
+
+362
+00:51:54,880 --> 00:52:04,960
+result is nothing but a simple tool message so 100.4 before was a tool message which you just directly return
+
+363
+00:52:01,760 --> 00:52:13,119
+to it. But now when I ask a different question, let's say I ask who invented the theory of relativity in that case it
+
+364
+00:52:10,960 --> 00:52:21,839
+will not call tool. See, you don't see any tool message. So it is smartly figuring out what needs to be done here.
+
+365
+00:52:19,280 --> 00:52:30,240
+Now let's say I ask this question. I want to buy 20 Amazon stocks then 15 MST. What will be the total cost? Pause
+
+366
+00:52:27,359 --> 00:52:38,800
+this video and tell me what will happen. Well, you will think that it will first retrieve Amazon 20 stocks then 15 MS FT
+
+367
+00:52:36,240 --> 00:52:50,079
+and it will tell you the total. See, no, it did not work as per our expectation. So, what it did is it retrieved the MSFT
+
+368
+00:52:45,599 --> 00:52:59,760
+stock price I think MSF yeah 200.3. So, it made this second tool call, right? And it just retrieved this thing.
+
+369
+00:52:56,000 --> 00:53:10,079
+It did not do this math actually. So if you look at this state see you see the it made two tool calls actually and 150
+
+370
+00:53:07,839 --> 00:53:18,240
+and 200 but it is not taking that response back to LLM and LLM should say okay I have this price of MS50 this
+
+371
+00:53:15,839 --> 00:53:26,480
+price of Amazon let me add up and let me give you the comprehensive final answer. It is not doing that. So this needs some
+
+372
+00:53:23,680 --> 00:53:38,240
+update. Okay. So for that I will just copy paste. So let let's keep this as it is and Ctrl Ctrl + V and let's call this
+
+373
+00:53:35,680 --> 00:53:46,640
+tool call agent. Now I want to call it agent because I want to make it more intelligent. Okay. And the only change
+
+374
+00:53:43,680 --> 00:53:54,400
+you will do here is see right now when you make a tool call it will go directly to the end but you want the response
+
+375
+00:53:51,200 --> 00:54:06,559
+from tool to go back to chatbot. So for that you will simply say builder dot add age
+
+376
+00:54:01,839 --> 00:54:16,480
+from tools let's go back to chatbot so now okay I need to execute all of this okay so let's execute all the cells
+
+377
+00:54:12,720 --> 00:54:25,440
+step by step so look at this chart now from tools also it is going to this chatboard so this is becoming agentic
+
+378
+00:54:22,400 --> 00:54:34,559
+now Okay. So let me just show you how exactly it is agentic. So this I think let me just directly run
+
+379
+00:54:31,040 --> 00:54:41,520
+this. See now it is reasoning. Okay. And if you look at the state um
+
+380
+00:54:38,880 --> 00:54:52,800
+it made those two tool calls right? One for Amazon second for MSFT. And then again it made an AI call. See and it
+
+381
+00:54:48,880 --> 00:55:02,800
+told you the final result. So it is truly agentic because what happens is you have let's say your chatbot okay so
+
+382
+00:54:59,440 --> 00:55:11,359
+let's say your chatbot is an LLM based and then you are calling these tools okay so let's say you're calling this
+
+383
+00:55:08,480 --> 00:55:18,640
+tool to get the stock price and from here you go back and here is the response right so this is a question and
+
+384
+00:55:16,480 --> 00:55:27,359
+this is a response so first it will uh call it for Amazon. Okay. So, Amazon. Okay. Let's say
+
+385
+00:55:24,800 --> 00:55:35,440
+whatever is the Amazon price. Okay. Let's say 10. So, 10 goes here. Okay. Then again it
+
+386
+00:55:32,640 --> 00:55:41,920
+calls it for MSFT. What is the MSFT stock price? Let's say 20. So, 20 goes again here. And it will
+
+387
+00:55:40,400 --> 00:55:49,760
+do the reasoning. So, it is doing like multi-step planning almost. I mean, I know it's simple but it is doing those
+
+388
+00:55:47,440 --> 00:55:56,160
+multiple iterations. And therefore if you remember our definition of agent AKI when you give it a tool access it should
+
+389
+00:55:54,400 --> 00:56:03,920
+be able to call the tool whenever required and it should be able to take back all those response and generate a
+
+390
+00:56:00,960 --> 00:56:10,160
+comprehensive final output. Let's talk about memory. Now when you are doing a conversation with chatboard you need to
+
+391
+00:56:08,480 --> 00:56:16,400
+maintain a context. So let's say if you ask a question I want to buy 10 Reliance stocks. What is the price? There will be
+
+392
+00:56:14,160 --> 00:56:23,359
+price. then you can say I want to buy five MSFT stocks and add the price to the previous total. So it needs to know
+
+393
+00:56:21,839 --> 00:56:32,720
+what happened previously. Okay, therefore memory is important. And in our code previously we used simple
+
+394
+00:56:29,440 --> 00:56:41,680
+Python list. So if you look at this one, you see we used Python coding and Python list to append messages to the previous
+
+395
+00:56:38,559 --> 00:56:51,280
+chat history. And this is not a very efficient way of maintaining memory. Lang graph provides inbuilt constructs
+
+396
+00:56:48,160 --> 00:56:57,440
+to save the memory. Okay. So we will look into that. So this way works but it's not very efficient. You might run
+
+397
+00:56:54,960 --> 00:57:05,839
+into the issues. So we will look at the proper way using lang graph inbuilt methods. I'm going to click here crl +
+
+398
+00:57:03,599 --> 00:57:16,000
+v. Okay. Just copy pasting the last notebook. Let's call it memory. And first let's understand what happens
+
+399
+00:57:12,960 --> 00:57:27,680
+if you don't have memory. So here if you click on this button it will just run all the cells. And now see let's say if
+
+400
+00:57:22,240 --> 00:57:39,799
+I ask a different question which is uh get me the current price of
+
+401
+00:57:34,559 --> 00:57:49,599
+a real stock. Okay. get me the and tell me how many or using a current price. You
+
+402
+00:57:45,280 --> 00:58:00,960
+can just say using the current price, tell me the total price of 20 10 real stocks
+
+403
+00:57:56,720 --> 00:58:08,480
+and add it to previous total. Tell me will this work or not? See could you please provide the
+
+404
+00:58:06,640 --> 00:58:19,280
+previous to it doesn't know what happened previously. So let's use uh this thing called checkpoint memory.
+
+405
+00:58:15,760 --> 00:58:27,680
+So if you look at the documentation you can import this from lang graph checkpoint memory import memory saver.
+
+406
+00:58:23,760 --> 00:58:37,680
+Okay. So let me import that here. I think you can import anywhere. So I'm going to import here.
+
+407
+00:58:34,880 --> 00:58:46,000
+Okay, so you are importing this object of memory saver class and then this memory you will provide while compiling
+
+408
+00:58:44,000 --> 00:58:53,440
+a graph. So here you will say check pointer is is equal to memory. Okay, so you created
+
+409
+00:58:51,119 --> 00:59:00,880
+the object while compiling the graph you are saying that take this object of memory. We are not done yet. So one last
+
+410
+00:58:58,559 --> 00:59:12,000
+step is when you invoke this method. Okay. So let me just remove this. You need to
+
+411
+00:59:08,240 --> 00:59:19,920
+provide something called config which is a dictionary that will say configurable
+
+412
+00:59:15,760 --> 00:59:30,880
+and thread ID. Th trade ID let's say my thread ID is one. I'll tell you the value of this thread ID later on. But
+
+413
+00:59:26,640 --> 00:59:42,160
+for now when you invoke this graph, let's pass this config. Config is equal to config. Okay.
+
+414
+00:59:39,440 --> 00:59:52,240
+So you got the total price of April stocks. Okay. 100.4. Or let me actually this is not needed.
+
+415
+00:59:49,200 --> 01:00:02,240
+Let me just remove this cell. Let me add it here. And I will add it to both.
+
+416
+00:59:58,880 --> 01:00:12,960
+So config here and config here. Same config with same thread ID. So now when I run this, it will tell me
+
+417
+01:00:09,520 --> 01:00:21,280
+6,04 is the total price. And when I run that, okay, so here is not working because apparently I did not execute the
+
+418
+01:00:17,280 --> 01:00:27,520
+previous code. So let's execute by clicking on run all and see what happens.
+
+419
+01:00:25,280 --> 01:00:39,599
+See now it worked. Previously the price was 64. Now 64 + 876 68 80. Isn't this amazing? Now you can maintain two
+
+420
+01:00:37,680 --> 01:00:52,400
+different threads also. So let me show you. So say if I add a new cell here. Okay. So let me how do I add a new cell?
+
+421
+01:00:49,760 --> 01:00:59,200
+You can press button B to add a new cell. And let's assume
+
+422
+01:00:56,640 --> 01:01:10,559
+here I'm creating a different thread ID. Different thread ID. Okay, thread ID too. And here I will say uh let's pick
+
+423
+01:01:06,079 --> 01:01:22,000
+another stock Apple. Okay. Tell me the current price of five
+
+424
+01:01:18,000 --> 01:01:28,960
+Apple stocks. Okay. And here the thread ID is two. So when
+
+425
+01:01:26,799 --> 01:01:38,079
+you run it, see the current price of Apple stock is this. And you're saying like first I'm
+
+426
+01:01:35,119 --> 01:01:47,119
+having thread ID 1 then I have thread ID 2 thread ID 1 again. So let me just get thread ID. You know what I I think I
+
+427
+01:01:44,480 --> 01:01:57,200
+need to call it config 1 and two. So config one is this. Config 2 is this. Okay. So here I'm passing config 2. Here
+
+428
+01:01:53,520 --> 01:02:02,839
+I'm passing config one. Um and then
+
+429
+01:02:03,280 --> 01:02:16,960
+uh you will say something else. So tell me the current price of five MS stocks and
+
+430
+01:02:14,079 --> 01:02:23,040
+add it to previous total. Okay.
+
+431
+01:02:21,119 --> 01:02:31,520
+And just to be on a safe side, I will just execute all the cells. So make sure you are passing config 2 here. Okay,
+
+432
+01:02:27,040 --> 01:02:42,000
+config 1, config 2, and config 1. So the output of config 1 was $6,04. Correct? And in config 1 again when I
+
+433
+01:02:38,880 --> 01:02:50,079
+said, okay, add it to previous total. It did not remember Apple's total, but it remember this. See, 6,04 is a previous
+
+434
+01:02:48,400 --> 01:02:58,319
+total. I hope you're getting it. It's pretty common sense. So it is maintaining two different thread
+
+435
+01:02:53,920 --> 01:03:09,119
+context. Okay. So if I to uh draw a picture, it will look something like this where I have two threads. Okay. So
+
+436
+01:03:06,160 --> 01:03:19,839
+I have thread one and then this one is
+
+437
+01:03:16,319 --> 01:03:32,160
+a thread two. Okay. Okay. So in a thread one in thread two if you look at just thread two we ask for five apple stock
+
+438
+01:03:26,160 --> 01:03:40,160
+price which is $502 right? So here five apple and the price is $502
+
+439
+01:03:37,839 --> 01:03:53,200
+and then you add 5 msft. So the five msft is 1, right? So 5 MSFT.
+
+440
+01:03:49,599 --> 01:04:01,920
+So 5 MSFT is 1,1 and it is just adding these two. So when it adds that you get 15
+
+441
+01:04:00,160 --> 01:04:12,319
+03, right? So this is my thread two execution. But when I look at
+
+442
+01:04:06,880 --> 01:04:21,760
+thread one u we asked for we asked this question which where we got 64 and in that 64
+
+443
+01:04:18,640 --> 01:04:30,799
+you are adding 876 see 876 you are adding to 64. So this um memory is used not only to
+
+444
+01:04:28,880 --> 01:04:39,839
+maintain context around different threads but it is also useful to resume complex state any time for error
+
+445
+01:04:36,720 --> 01:04:44,400
+recovery or human in the workflow. Okay. So if you read through it you will realize add memory is not just
+
+446
+01:04:43,119 --> 01:04:49,520
+maintaining memory for your chat conversation but let's say you are having some kind of error failure and
+
+447
+01:04:47,680 --> 01:04:57,119
+you want to resume from the last good state. The checkpoint checkpoint is like you are kind of saving you know how do
+
+448
+01:04:53,200 --> 01:05:03,920
+you save a file in gate or in your IDE and you can say control zt control z so it is just saving checkpoint at certain
+
+449
+01:05:01,760 --> 01:05:10,400
+point so that you can go back and recover from error when you're done building your agenti application and
+
+450
+01:05:08,720 --> 01:05:17,599
+when you're ready to deploy to production you want to think about monitoring because agent might be taking
+
+451
+01:05:15,359 --> 01:05:25,440
+multi-turns and it might be incurring lot of API cost you want to know how many tokens are being used, what is the
+
+452
+01:05:22,160 --> 01:05:31,280
+cost, what is the latency and you also want to have some kind of trace of output so that you know that your
+
+453
+01:05:29,200 --> 01:05:38,079
+customers are given the right answers and you can perform some kind of audit. Langsmith is a tool that allows you to
+
+454
+01:05:35,760 --> 01:05:45,880
+do this and we are going to incorporate it in the code that we have built so far quickly. Okay, so just type
+
+455
+01:05:42,880 --> 01:05:53,839
+smith.langchain.com and you can login using your Google ID. I'm already logged in. So I see this
+
+456
+01:05:50,720 --> 01:06:00,240
+kind of setup here where in the home I will see this kind of projects. So I'm going to set up a new project. So just
+
+457
+01:05:58,000 --> 01:06:07,599
+click on setup tracing and I'll show you it's very easy. Click on generate API key and then add that API key here.
+
+458
+01:06:05,599 --> 01:06:18,480
+Okay. So I'm going to generate the API key and add it in your env file. Then set this other variable length tracing
+
+459
+01:06:15,039 --> 01:06:24,079
+true. Langmith endpoint is this and project name is your project name. In our case, it's langraph learning. You
+
+460
+01:06:22,079 --> 01:06:31,920
+can give any project name by the way. So if you look at all the instructions here, they have given uh those
+
+461
+01:06:28,960 --> 01:06:40,960
+instructions. Okay. After that, you will u create a new notebook. So let me just create a new notebook uh for I think
+
+462
+01:06:38,160 --> 01:06:48,319
+let's do it for an agent. Okay. So I'm going to copy paste file tool agent call it 7
+
+463
+01:06:45,440 --> 01:06:58,400
+um langsmith right lang. And here you will have to install lang
+
+464
+01:06:56,720 --> 01:07:09,760
+smmith module first. So you will just say uv add lang and it added it easily.
+
+465
+01:07:05,839 --> 01:07:21,359
+Then you will convert uh this into a function. So, Langsmith allows you to uh upload the traces of your calls via
+
+466
+01:07:18,000 --> 01:07:31,680
+annotation. Okay. So, you can say from langmmith import traceable and traceable is an annotation
+
+467
+01:07:29,359 --> 01:07:38,559
+that you can define on top of any function. So, we will define a function called call graph where you just pass in
+
+468
+01:07:36,720 --> 01:07:45,920
+a question right that you want to ask to your chatboard. and it will answer that question. Okay.
+
+469
+01:07:43,680 --> 01:07:56,079
+So here call graph will be called on what is the price of let's say apple stock right
+
+470
+01:07:50,720 --> 01:08:05,599
+now. And this is your query. Okay. And you will return
+
+471
+01:08:01,359 --> 01:08:14,480
+this particular thing. All right. I will remove the other calls that we have. Actually, you know what? I
+
+472
+01:08:12,400 --> 01:08:21,600
+think this looks like a better call because it has multiple tool calls involved. So, I will try that. Okay,
+
+473
+01:08:19,040 --> 01:08:30,319
+just simple one call and click on this to run all the code. Now, when you call load environment, it loaded those
+
+474
+01:08:27,120 --> 01:08:36,960
+environment variables into memory. And then when you have this add traceable, it will add traces to our project. So
+
+475
+01:08:35,199 --> 01:08:47,279
+let's look at our Langsmith project online and see what's going on. So here uh if you refresh
+
+476
+01:08:44,719 --> 01:08:56,239
+you will find this project Langraph Learning. It wasn't there before. And when you click on it you will see the
+
+477
+01:08:52,319 --> 01:09:03,920
+calls. Okay. So click on it. I want to buy 20 stocks and you can see the call breakdown. Now interesting thing here is
+
+478
+01:09:02,080 --> 01:09:14,159
+it will show you the cost. So apparently the Google Gemini API that I'm using it's cost it's costing some money to me
+
+479
+01:09:09,279 --> 01:09:21,440
+284 tokens. Um you can look at the tool calls. Tool calls were of course free latency was zero. In this case latency
+
+480
+01:09:18,640 --> 01:09:29,679
+was 82 seconds. So see you can monitor cost you can monitor latency. You can also audit some of these calls to check
+
+481
+01:09:27,359 --> 01:09:38,239
+for the correct output. Okay. So whenever you are building enterprise scale application having this kind of
+
+482
+01:09:35,440 --> 01:09:46,880
+monitoring tool will be extremely useful and tracing is just one dimension of uh lang. It provides many other features as
+
+483
+01:09:44,719 --> 01:09:53,120
+well such as evaluating agents performance uh it and collaborate on prompts
+
+484
+01:09:51,040 --> 01:09:59,040
+monitoring you know route decisions and things like that like since this is a lang craft tutorial and not langid
+
+485
+01:09:56,640 --> 01:10:07,679
+tutorial I don't I don't want to go into details of those additional features but at least by doing this you set up a
+
+486
+01:10:04,159 --> 01:10:15,440
+basic lang project and you have your traces being collected on this dashboard let's go over another important topic
+
+487
+01:10:12,960 --> 01:10:24,800
+called human in the loop also known as hitl when you're building agentic workflows they can't be fully autonomous
+
+488
+01:10:22,880 --> 01:10:31,360
+before performing some critical action you want to take some human approval let's say you're buying stocks using
+
+489
+01:10:28,159 --> 01:10:37,360
+some AI system before it executes a specific trade you want to make sure everything is perfect and give a human
+
+490
+01:10:35,040 --> 01:10:44,239
+approval so that's what we are going to build right now to demonstrate human in the loop
+
+491
+01:10:41,120 --> 01:10:51,920
+I have created this Python file. I'm not using notebook to make things easier. Just a simple Python file which has get
+
+492
+01:10:49,679 --> 01:10:58,800
+stock price tool. We have written this code before. So it shouldn't be a surprise. When you run it, you ask the
+
+493
+01:10:56,080 --> 01:11:12,080
+price of 10 MS50 stocks and it will tell you. Now let's add another tool to buy the stocks. Okay? So we will say tool
+
+494
+01:11:09,199 --> 01:11:24,239
+and uh buy stocks. Okay. So here let's say I will also add
+
+495
+01:11:20,320 --> 01:11:30,719
+total price for this you know and you're just writing a dummy Python function. I I I don't want to go ahead and connect
+
+496
+01:11:28,640 --> 01:11:36,719
+it with my Robin Hood account and execute the trade for real. Okay. a learning tutorial but in real life you
+
+497
+01:11:35,040 --> 01:11:46,239
+will have some API integration you are calling whatever your stock brokerage accounts API to execute it okay so you
+
+498
+01:11:42,080 --> 01:11:58,960
+bought this quantity share for a total price of this very simple and then add that to this particular tools array and
+
+499
+01:11:55,600 --> 01:12:12,320
+then tools will go to llm with tools okay so now let's execute that Okay. So here I am going to add a second step
+
+500
+01:12:08,400 --> 01:12:20,480
+saying that buy 10 MSFT stocks at current price. And here
+
+501
+01:12:18,880 --> 01:12:29,360
+okay. So let me just run it and this is okay. Right. So it is saying I have bought 10
+
+502
+01:12:26,239 --> 01:12:36,560
+shares of MSFT for a total price of this. So it worked as expected folks. Sometimes I have seen that just Gemini
+
+503
+01:12:33,840 --> 01:12:43,360
+model behaves unpredictable way. So you might get like random output. If you want the best output you should use GPT
+
+504
+01:12:41,600 --> 01:12:53,920
+model. I mean of course for that you will need open AI API. Um but just be aware that sometimes you might get weird
+
+505
+01:12:51,199 --> 01:13:02,960
+output and it's just LLM, right? It's just unpredictable at times. Now I want to add the human in the loop component
+
+506
+01:13:00,640 --> 01:13:08,800
+for which we will use this interrupt function. So if you look at their documentation they have this interrupt
+
+507
+01:13:06,640 --> 01:13:15,040
+function which is similar to input function in Python. Whenever you want to take input from Python right like let's
+
+508
+01:13:13,120 --> 01:13:23,840
+say okay should I execute this trade? Yes and no. We use input function right? Interrupt is a similar function. So if
+
+509
+01:13:20,960 --> 01:13:33,520
+you look at the documentation you know this is how you interrupt. So let me copy paste this to import that
+
+510
+01:13:29,840 --> 01:13:40,719
+first obviously and then I will not buy the stocks directly. I will just say interrupt and I will say approve buying
+
+511
+01:13:38,400 --> 01:13:54,560
+this much right this stocks and that will be your decision and if decision is equal to yes then do this
+
+512
+01:13:50,320 --> 01:14:03,600
+otherwise buying decline. Okay. Now whenever it is executing and when it comes to this node when it encounters
+
+513
+01:14:00,560 --> 01:14:12,880
+this line it will stop execution and it will ask for human input. So how do you know it has stopped the execution? Well
+
+514
+01:14:08,800 --> 01:14:20,800
+here in this code uh you can just print I'll just copy paste here. So you can just print here
+
+515
+01:14:17,440 --> 01:14:29,199
+state.get interrupt. Okay. So when you do this see it will print this value which means the graph execution has
+
+516
+01:14:25,760 --> 01:14:38,239
+interrupted right. So if you look at our particular graph uh the graph nodes if you think about it right we have start
+
+517
+01:14:34,640 --> 01:14:48,400
+node then we have get stock prices tool right so we have a chatbot actually so this is chatbot and then it has access
+
+518
+01:14:44,159 --> 01:14:57,760
+to the tools so you have seen the dotted line right so tools and in tools both the tools get prize as well as execute
+
+519
+01:14:54,960 --> 01:15:05,120
+and there is this and then there is and correct. So now what happens is when you're buying a stock see it will come
+
+520
+01:15:03,600 --> 01:15:13,440
+through this nodes right? So it's in a chatboard it will make a tool call. So it will call buy tools and then it will
+
+521
+01:15:10,560 --> 01:15:23,600
+stop here. It will not go further ahead. It will just stop. And here is where human in the loop right? So human in the
+
+522
+01:15:21,040 --> 01:15:30,960
+loop will come in play where you will give some kind of output and then it will uh finish the remaining execution.
+
+523
+01:15:29,280 --> 01:15:39,440
+It's very straightforward folks. So I hope you're getting it. So to get that here using Python input
+
+524
+01:15:36,400 --> 01:15:51,840
+function I will say okay um do you want to approve like approve yes no
+
+525
+01:15:49,760 --> 01:15:59,520
+you want to approve that and once you have the decision you will say graph dot invoke
+
+526
+01:15:57,520 --> 01:16:06,000
+command. See, so you are passing decision through command. So what command will do is
+
+527
+01:16:04,239 --> 01:16:12,880
+whatever is decision, right? Either yes or no, it will put it here as an output of the interrupt. So when you call
+
+528
+01:16:10,960 --> 01:16:19,360
+interrupt, it will be blocked. And when you say command decision,
+
+529
+01:16:16,960 --> 01:16:26,719
+it will actually this this is the name of the argument. So in
+
+530
+01:16:24,080 --> 01:16:34,400
+command you're saying resume wherever you're blocked resume with this particular decision which is yes. So let
+
+531
+01:16:30,719 --> 01:16:42,159
+me just run it so you get an idea. Um so here it should ask yes. See approve buying this. Now you
+
+532
+01:16:39,120 --> 01:16:52,000
+will say yes no. So you will say yes and when you say yes it will okay let me see. So when I said yes
+
+533
+01:16:50,480 --> 01:17:02,320
+actually it worked. I should have printed actually here. Uh let me just print this thing. I forgot to print that
+
+534
+01:16:58,800 --> 01:17:10,880
+state actually that's why. Okay. So approve. Yes. And it will say um all right. Let me just debug it to
+
+535
+01:17:08,960 --> 01:17:19,040
+see what's going on. So I'll put a break point here. And let's run this. I hope this
+
+536
+01:17:16,480 --> 01:17:26,960
+interrupt and PyCharm's debugger interrupt kind of works well in the sync. Okay, approve. You will say yes.
+
+537
+01:17:24,880 --> 01:17:33,600
+You see decision you got it as yes. So it is a working as expected. So when you do this, it should return that that.
+
+538
+01:17:31,600 --> 01:17:40,560
+Okay, an obvious mistake that I was making was I need to get this back in state. Okay, so that was a problem. So I
+
+539
+01:17:38,560 --> 01:17:51,520
+was not returning that state back into this variable. So now when you say approve yes it should say you bought 10
+
+540
+01:17:46,320 --> 01:17:59,199
+stocks and if you say approval no let me try that no see I was not able to buy stocks buying
+
+541
+01:17:56,560 --> 01:18:06,400
+decline so it this one will return buying decline but then llm will enhance the output and it will add that the line
+
+542
+01:18:03,840 --> 01:18:16,239
+might look something different so I hope you got a some idea on you know how you can involve all humans in the agent AI
+
+543
+01:18:13,600 --> 01:18:23,600
+workflows using the interrupt and command. That's it folks. The link for the code is given in
+
+544
+01:18:22,000 --> 01:18:29,360
+the video description. If you have any question, post in the comment box below. Feel free to share this with your
+
+545
+01:18:27,360 --> 01:18:36,760
+friends who want to learn agentic AI using Langraph. And if you like this video, give it a thumbs up. Thank you
+
+546
+01:18:33,199 --> 01:18:36,760
+very much for watching.
+

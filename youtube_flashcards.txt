@@ -1,0 +1,38 @@
+Flashcard 1:
+Video: LangChain vs LangGraph vs LangSmith
+Front: What is Llm?
+Back: What I mean by that is let's say you start somewhere and you are making an LLM call.
+What I mean by that is let's say you start somewhere and you are making an LLM call.
+Video Time: 00:00:25,200 - 00:03:30,719
+Link: https://www.youtube.com/watch?v=vJOGC8QJZJQ&t=25s
+
+Flashcard 2:
+Video: LangChain vs LangGraph vs LangSmith
+Front: What is chain?
+Back: Now you can do all of this in Python but lang chain is a beautiful framework that makes these things easier by providing readymade classes.
+all of this in Python but lang chain is a beautiful framework that makes these things easier by providing readymade classes.
+Video Time: 00:01:06,160 - 00:05:04,257
+Link: https://www.youtube.com/watch?v=vJOGC8QJZJQ&t=66s
+
+Flashcard 3:
+Video: LangChain vs LangGraph vs LangSmith
+Front: What is etc?
+Back: It just gets the latest price of any stock Microsoft, Apple etc.
+Video Time: 00:04:51,037 - 00:06:31,999
+Link: https://www.youtube.com/watch?v=vJOGC8QJZJQ&t=291s
+
+Flashcard 4:
+Video: LangChain vs LangGraph vs LangSmith
+Front: What is Lang?
+Back: Here I'm showing you a code of one of the graphs we built in in Langraph.
+Video Time: 00:01:26,907 - 00:07:31,280
+Link: https://www.youtube.com/watch?v=vJOGC8QJZJQ&t=86s
+
+Flashcard 5:
+Video: LangChain vs LangGraph vs LangSmith
+Front: What is graph?
+Back: If you want to learn lang graph in detail then I have this uh tutorial.
+It's like more than 1 hour tutorial which will walk you through the entire framework from the very beginning.
+Video Time: 00:05:43,319 - 00:10:17,479
+Link: https://www.youtube.com/watch?v=vJOGC8QJZJQ&t=343s
+

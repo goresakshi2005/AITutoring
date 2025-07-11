@@ -1,0 +1,26 @@
+[
+    {
+        "front": "Vector Database for Efficient Search",
+        "back": "A vector database is a storage system optimized for fast similarity searches, enabling efficient querying of large datasets. It leverages indexing and hashing functions to facilitate rapid retrieval of similar vectors, making it ideal for applications like semantic search and document retrieval."
+    },
+    {
+        "front": "Word Embeddings as Vector Representations",
+        "back": "Word embeddings represent words as dense vectors in a high-dimensional space, capturing semantic relationships and properties. These vector representations enable mathematical operations, allowing words to be compared, added, and transformed, and are essential for natural language processing and machine learning applications."
+    },
+    {
+        "front": "Similarity Measures for Word Embeddings",
+        "back": "Similarity measures, such as cosine similarity, quantify the closeness between word embeddings, enabling the capture of semantic relationships and nuances. These measures are crucial for applications like semantic search, document retrieval, and natural language processing, where understanding word relationships is essential."
+    },
+    {
+        "front": "Word2Vec Technique for Vector Representations",
+        "back": "Word2Vec is a technique for generating word embeddings, using shallow neural networks to learn vector representations from large text datasets. It produces high-quality embeddings that capture semantic relationships, and is widely used in natural language processing and machine learning applications."
+    },
+    {
+        "front": "Scalability Challenges in Large Databases",
+        "back": "Large databases pose significant scalability challenges, including computational requirements and storage constraints, which can hinder efficient querying and retrieval. Techniques like vector databases, indexing, and hashing functions are essential for overcoming these challenges and enabling fast and efficient search and retrieval."
+    },
+    {
+        "front": "Locality Sensitive Hashing for Efficient Search",
+        "back": "Locality sensitive hashing is a technique for efficient nearest neighbor search, which maps similar vectors to nearby locations in a hash table. It enables fast and efficient search and retrieval, making it ideal for large-scale applications like semantic search and document retrieval."
+    }
+]
